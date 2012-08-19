@@ -25,6 +25,8 @@ get.prime <- function(from, to) {
 
 # 按素数表顺序递归分解
 primeFactorize <- function(x) {
+	if(x==1) return(1)
+	if(is.prime(x)) return(x)
 	factorizer <- local({
 		max.n <- 100
 		primes <- get.prime(2,max.n)

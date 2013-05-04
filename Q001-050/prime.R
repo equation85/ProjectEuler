@@ -2,6 +2,7 @@
 
 # 判断素数
 is.prime <- function(x) {
+  if(x<=1) return(FALSE)
 	if(x==2) return(TRUE)
 	if(x %% 2 == 0) return(FALSE)
 	flag <- TRUE

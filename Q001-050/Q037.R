@@ -5,7 +5,7 @@ source('prime.R')
 
 is.truncatable.primes <- function(x) {
   num <- as.integer(strsplit(as.character(x),'')[[1]])
-  if(any(num%%2==0)) return(FALSE)
+  if(x>100 && any(num%%2==0)) return(FALSE)
   len <- length(num)
   if(len==1) return(FALSE)
   candi <- NULL
@@ -34,6 +34,7 @@ repeat {
   i <- i + 1
   num <- num + 2
 }
+cat('\n')
 print(res)
 cat('Sum =', sum(res),'\n')
 

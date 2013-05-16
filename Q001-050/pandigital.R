@@ -69,6 +69,71 @@ find.pandigital <- function(x, direction=c('next','prev')) {
   }
 }
 
+pandigital.character <- function(x, candidates=1:9) {
+  num <- strsplit(as.character(x),'')[[1]]
+  l1 <- length(num)
+  num <- sort(unique(num))
+  if(length(num)!=l1) return(FALSE)
+  candi <- sort(candidates)
+  if(length(num)!=length(candi)) return(FALSE)
+  return(all(num==candi))
+}
+
+find.pandigital.character <- function(x, direction=c('next','prev')) {
+  direction <- match.arg(direction)
+  #a <- ifelse(direction=='next', 1, -1)
+  #print(a)
+#  x.type <- class(x)
+#  if(!is.character(x)) x <- as.character(x)
+  num <- strsplit(x,'')[[1]]
+  pos1 <- length(num)
+  pos2 <- length(num)-1
+  vec1 <- NULL
+  repeat {
+    cond1 <- num[pos1]>num[pos2]
+    if(direction!='next')
+      cond1 <- !cond1
+    if(cond1) {
+      vec1 <- rbind(vec1, c(pos1, pos2))
+      if(pos1-pos2>1) {
+        pos1 <- pos1 - 1
+        pos2 <- pos1 - 1
+      } else {
+        break
+      }
+    } else {
+      if(pos2>1) {
+        pos2 <- pos2 - 1
+      } else if(pos1>2) {
+        pos1 <- pos1 - 1
+        pos2 <- pos1 - 1
+      } else {
+        break
+      }
+    }
+  }
+  if(is.null(vec1)) {
+    return(NA)
+  } else {
+    #print(vec1)
+    tmp.idx <- which(vec1[,2]==max(vec1[,2]))
+    if(direction=='next')
+      sub1.idx <- which.min(num[vec1[tmp.idx,1]])
+    else
+      sub1.idx <- which.max(num[vec1[tmp.idx,1]])
+    pos1 <- vec1[tmp.idx[sub1.idx],1]
+    pos2 <- vec1[tmp.idx[sub1.idx],2]
+    #print(c(pos1, pos2))
+    left.vec <- if(pos2>1) num[1:(pos2-1)] else NULL
+    center.vec <- num[pos1]
+    right.vec <- setdiff(num[pos2:length(num)], center.vec)
+    res <- c(left.vec, center.vec, sort(right.vec, decreasing=ifelse(direction=='next',FALSE,TRUE)))
+    res <- paste(res, collapse='')
+    return(res)
+  }
+}
+
+
 #### Test:
 #library(plyr)
 #a <- rep(NA, factorial(9))

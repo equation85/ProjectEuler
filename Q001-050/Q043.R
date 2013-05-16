@@ -14,18 +14,22 @@ is.sub.divisible <- function(x) {
 }
 
 ### Test:
-is.sub.divisible(1406357289)
+#is.sub.divisible(1406357289)
 
 ### Main: 
 s <- 0
 curr <- '0123456789'
+i <- 0
 repeat {
+  i <- i + 1
+  if(i %% 10000 == 0) cat(i,'=> ')
   if(is.na(curr)) break
   if(is.sub.divisible(curr)) {
-    cat(curr, '=> ')
+    cat('(', curr, ') => ')
     s <- s + as.numeric(curr)
   }
   curr <- find.pandigital.character(curr)
 }
+cat('\n')
 cat('Sum =', s, '\n')
 

@@ -35,6 +35,13 @@ is.prime <- function(x) {
 
 # 返回from:to的所有素数
 get.prime <- function(from, to) {
+  if(from>to) stop("'from' > 'to'")
+  if(from==to) {
+    if(is.prime(from))
+      return(from)
+    else
+      return(NULL)
+  }
 	tmp.from <- ifelse(from %% 2==0, from+1, from)
 	tmp.vec <- seq(tmp.from, to, by=2)
 	if(from <= 2) tmp.vec <- c(2,tmp.vec)

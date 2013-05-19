@@ -48,3 +48,20 @@ get.prime <- function(from, to) {
 	tmp.vec[sapply(tmp.vec,is.prime)]
 }
 
+# 获取后n个素数
+get.next.prime <- function(x, n) {
+  if(n<1) stop("n<1")
+  mx <- max(x)
+  curr <- if(mx%%2==0) mx+1 else mx+2
+  res <- rep(NA, n)
+  count <- 0
+  repeat {
+    if(is.prime(curr)) {
+      count <- count + 1
+      res[count] <- curr
+    }
+    curr <- curr + 2
+    if(count==n) break
+  }
+  return(c(x,res))
+}

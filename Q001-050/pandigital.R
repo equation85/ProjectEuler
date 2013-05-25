@@ -126,7 +126,9 @@ find.pandigital.character <- function(x, direction=c('next','prev')) {
     #print(c(pos1, pos2))
     left.vec <- if(pos2>1) num[1:(pos2-1)] else NULL
     center.vec <- num[pos1]
-    right.vec <- setdiff(num[pos2:length(num)], center.vec)
+    #right.vec <- setdiff(num[pos2:length(num)], center.vec)
+    right.vec <- num[pos2:length(num)]
+    right.vec <- right.vec[-which(right.vec==center.vec)[1]]
     res <- c(left.vec, center.vec, sort(right.vec, decreasing=ifelse(direction=='next',FALSE,TRUE)))
     res <- paste(res, collapse='')
     return(res)

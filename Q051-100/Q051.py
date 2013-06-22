@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # encoding=utf-8
 
+"""
+Euler 51: Prime digit replacements
+"""
+
 import sys
 sys.path.append('..')
 from utils.Prime import isPrime

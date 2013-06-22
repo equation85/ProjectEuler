@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # encoding=utf-8
 
+"""
+Euler 52: Permuted multiples
+"""
+
 def sortDigit(x):
   xChr = list(str(x))
   xChr.sort()

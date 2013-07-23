@@ -21,10 +21,10 @@ def getPrime(begin, end):
     return []
   if begin==end:
     return begin if isPrime(begin) else []
-  if begin%2==0: begin += 1
+  res = []
   if begin<3:
-    begin = 3
-    res = [2]
+    res += [2]
+  if begin%2==0: begin += 1
   for i in xrange(begin,end+1,2):
     if isPrime(i): res += [i]
   return res
